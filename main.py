@@ -30,8 +30,8 @@ def login():
 
 # WHAT THE DONATOR WILL SEE
 @app.route("/user/<username>")
-def user():
-    pass
+def user(username):
+    return render_template("user.html")
 
 
 if __name__ == '__main__':
