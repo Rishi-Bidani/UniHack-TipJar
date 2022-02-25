@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from server.password import Password
 
 app = Flask(__name__)
 
@@ -23,7 +24,9 @@ def login():
                 -> Login if correct -> redirect to users/username/edit
                 -> Send error response if wrong
         """
-        pass
+        username = request.form.get('username')
+        password = request.form.get('password')
+        print(username, password)
     else:
         return render_template("404.html")
 
