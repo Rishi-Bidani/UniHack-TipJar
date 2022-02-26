@@ -13,7 +13,7 @@ db.create_table_user()
 
 
 # db.insert_user("1234", "username", "password")
-db.select_username_from_users("username")
+print(db.get_password_for_user("username"))
 
 # HOME
 @app.route("/")
