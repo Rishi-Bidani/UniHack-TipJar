@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, abort
 from server.password import Password
 from server.database import Database
+from server.keygen import Key
 
 import os.path as path
 
@@ -37,6 +38,14 @@ async def login():
         """
         username = request.form.get('username')
         password = request.form.get('password')
+        pass_from_db = db.get_password_for_user(username)
+        if Password.check_password(password, pass_from_db):
+            # Redirect to user/username/edit
+            pass
+        else:
+            abort(401)
+
+
         print(username, password)
         return redirect(url_for("login"))
     else:
@@ -45,11 +54,22 @@ async def login():
 
 # REGISTER
 @app.route("/register", methods=['GET', 'POST'])
-def register():
+async def register():
     if request.method == "GET":
         return render_template("register.html")
+
     if request.method == "POST":
-        pass
+        username = request.form.get('username')
+        password = Password.hash(request.form.get('password'))
+        email = request.form.get('email')
+        uuid = Key.generate(7)
+        print(username, password, email, uuid)
+        try:
+            db.insert_user(uuid, username, email, password)
+            return redirect("/")
+        except Exception as e:
+            print(e)
+            abort(500)
     else:
         abort(404)
 

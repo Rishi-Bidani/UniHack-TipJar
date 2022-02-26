@@ -5,20 +5,20 @@ from datetime import datetime
 class Database:
     def __init__(self, dbname):
         self.dbname = dbname
-        self.con = sqlite3.connect(self.dbname)
+        self.con = sqlite3.connect(self.dbname, check_same_thread=False)
 
     def create_table_user(self):
         sql = """CREATE TABLE IF NOT EXISTS users 
-                 (uuid text PRIMARY KEY, created_at date, username text UNIQUE, password text)"""
+                 (uuid text PRIMARY KEY, created_at date, username text UNIQUE, email text, password text)"""
         cursor = self.con.cursor()
         cursor.execute(sql)
         self.con.commit()
 
-    def insert_user(self, uuid, username, password):
+    def insert_user(self, uuid, username, email, password):
         created_at = datetime.today().strftime('%Y-%m-%d')
-        sql = "INSERT INTO users (uuid, created_at, username, password) VALUES (?,?,?,?)"
+        sql = "INSERT INTO users (uuid, created_at, username, email, password) VALUES (?,?,?,?,?)"
         cursor = self.con.cursor()
-        cursor.execute(sql, (uuid, created_at, username, password))
+        cursor.execute(sql, (uuid, created_at, username, email, password))
         self.con.commit()
 
     def get_password_for_user(self, username):
