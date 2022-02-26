@@ -12,6 +12,9 @@ db = Database(database_file)
 db.create_table_user()
 
 
+# db.insert_user("1234", "username", "password")
+db.select_username_from_users("username")
+
 # HOME
 @app.route("/")
 def home():
@@ -41,7 +44,7 @@ async def login():
 
 
 # REGISTER
-@app.route("/register", method=['GET', 'POST'])
+@app.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == "GET":
         pass
