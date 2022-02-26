@@ -53,6 +53,7 @@ def register():
     else:
         abort(404)
 
+
 # WELCOME
 @app.route("/welcome")
 def welcome():
