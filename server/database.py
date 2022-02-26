@@ -22,9 +22,9 @@ class Database:
         self.con.commit()
 
     def get_password_for_user(self, username):
-        sql = f"SELECT password from users WHERE username={username}"
+        sql = f"SELECT password from users WHERE username=?"
         cursor = self.con.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, (username,))
         return cursor.fetchone()[0]
 
     # Table 2 - Code
@@ -35,7 +35,13 @@ class Database:
         self.con.commit()
 
     def insert_code(self, uuid, code):
-        sql = "INSERT INTO code (uuid, code) VALUES (?,?)"
+        sql = "INSERT INTO codes (uuid, code) VALUES (?,?)"
         cursor = self.con.cursor()
         cursor.execute(sql, (uuid, code))
         self.con.commit()
+
+    def get_uuid(self, code):
+        sql = "SELECT uuid FROM codes WHERE code=?"
+        cursor = self.con.cursor()
+        cursor.execute(sql, (code,))
+        return cursor.fetchone()[0]

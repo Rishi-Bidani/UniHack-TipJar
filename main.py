@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, abort
+from flask import Flask, render_template, request, url_for, redirect, abort, session
 from server.password import Password
 from server.database import Database
 from server.keygen import Key
@@ -6,11 +6,13 @@ from server.keygen import Key
 import os.path as path
 
 app = Flask(__name__)
+app.secret_key = '$ectret#eyFor$##$$i@ons'
 
 # create necessary tables
 database_file = path.join("server", "data", "data.db")
 db = Database(database_file)
 db.create_table_user()
+db.create_table_codes()
 
 
 # db.insert_user("1234", "username", "password")
@@ -29,24 +31,16 @@ async def login():
         return render_template("login.html")
 
     if request.method == "POST":
-        """
-        Implement login logic
-            - Get username from form
-            - Get password from form
-                -> Login if correct -> redirect to users/username/edit
-                -> Send error response if wrong
-        """
         username = request.form.get('username')
-        password = request.form.get('password')
+        password = request.form.get('password').encode()
+        uuid = db.get_uuid(username)
         pass_from_db = db.get_password_for_user(username)
         if Password.check_password(password, pass_from_db):
             # Redirect to user/username/edit
-            pass
+            session["username"] = username
+            return redirect(f"/user/{uuid}/edit")
         else:
             abort(401)
-
-
-        print(username, password)
         return redirect(url_for("login"))
     else:
         abort(404)
@@ -66,7 +60,9 @@ async def register():
         print(username, password, email, uuid)
         try:
             db.insert_user(uuid, username, email, password)
-            return redirect("/")
+            db.insert_code(uuid, username)
+            session["username"] = username
+            return redirect(f"/user/{uuid}/edit")
         except Exception as e:
             print(e)
             abort(500)
@@ -81,9 +77,30 @@ def welcome():
 
 
 # WHAT THE DONATOR WILL SEE
-@app.route("/user/<username>")
-def user(username):
+@app.route("/user/<code>")
+def user(code):
+    """"
+    Lookup code in table 2 and find coresponding uuid
+    redirect to uuid if correctly found
+    else redirect to 404
+    """
     return render_template("user.html")
+
+
+# WHAT THE ACCEPTOR WILL SEE AFTER LOGIN
+@app.route("/user/<code>/edit")
+def edit(code):
+    """
+    Look up code, check if logged in
+    """
+    if request.method == "GET":
+        if "username" in session:
+            print("logged in")
+            return render_template("edit.html", data=session["username"])
+        else:
+            abort(401)
+    abort(404)
+
 
 
 if __name__ == '__main__':
