@@ -13,7 +13,7 @@ db.create_table_user()
 
 
 # db.insert_user("1234", "username", "password")
-print(db.get_password_for_user("username"))
+# print(db.get_password_for_user("username"))
 
 # HOME
 @app.route("/")
@@ -47,7 +47,7 @@ async def login():
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == "GET":
-        pass
+        return render_template("register.html")
     if request.method == "POST":
         pass
     else:
