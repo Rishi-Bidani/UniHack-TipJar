@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, abort
 from server.password import Password
 from server.database import Database
 
@@ -11,6 +11,9 @@ database_file = path.join("server", "data", "data.db")
 db = Database(database_file)
 db.create_table_user()
 
+
+# db.insert_user("1234", "username", "password")
+print(db.get_password_for_user("username"))
 
 # HOME
 @app.route("/")
@@ -37,7 +40,18 @@ async def login():
         print(username, password)
         return redirect(url_for("login"))
     else:
-        return render_template("404.html")
+        abort(404)
+
+
+# REGISTER
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    if request.method == "GET":
+        pass
+    if request.method == "POST":
+        pass
+    else:
+        abort(404)
 
 
 # WHAT THE DONATOR WILL SEE

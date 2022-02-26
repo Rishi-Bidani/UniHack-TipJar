@@ -3,8 +3,7 @@ import random
 
 class Key:
     @staticmethod
-    def generate():
-        random.seed(number)
+    def generate(length):
         result = ''.join((random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') for i in range(length)))
         return result
 
