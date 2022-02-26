@@ -9,7 +9,7 @@ class Database:
 
     def create_table_user(self):
         sql = """CREATE TABLE IF NOT EXISTS users 
-                 (uuid text PRIMARY KEY, created_at date, username text, password text)"""
+                 (uuid text PRIMARY KEY, created_at date, username text UNIQUE, password text)"""
         cursor = self.con.cursor()
         cursor.execute(sql)
         self.con.commit()
@@ -26,3 +26,16 @@ class Database:
         cursor = self.con.cursor()
         cursor.execute(sql)
         return cursor.fetchone()[0]
+
+    # Table 2 - Code
+    def create_table_codes(self):
+        sql = "CREATE TABLE IF NOT EXISTS codes (uuid text, code text)"
+        cursor = self.con.cursor()
+        cursor.execute(sql)
+        self.con.commit()
+
+    def insert_code(self, uuid, code):
+        sql = "INSERT INTO code (uuid, code) VALUES (?,?)"
+        cursor = self.con.cursor()
+        cursor.execute(sql, (uuid, code))
+        self.con.commit()
