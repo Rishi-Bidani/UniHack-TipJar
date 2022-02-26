@@ -1,0 +1,51 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* COLOURS */
+:root {
+    /* Will change colours later */
+    --primary: black;
+    --secondary: white;
+    --tertiary: #f2f2f2;
+    --quaternary: #f2f2f2;
+
+    --bg-color: whitesmoke;
+}
+
+/* Other important variables */
+:root {
+    --title-height: clamp(1.2rem, 1.2rem + 2vw, 3rem);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+}
+
+.flex {
+    display: flex;
+}
+
+.flex--column {
+    flex-direction: column;
+}
+
+.center {
+    text-align: center;
+    margin: auto;
+}
+
+.title {
+    font-size: var(--title-height);
+    font-weight: bold;
+    color: var(--primary);
+}
+
+section.container {
+    height: 100vh;
+}
