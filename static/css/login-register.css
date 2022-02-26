@@ -15,7 +15,9 @@ form {
     margin-top: 2rem;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"],
+input[type="password"],
+input[type="email"]{
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 1rem;
@@ -46,11 +48,11 @@ article {
     place-self: flex-start;
 }
 
-h1{
+h1 {
     padding: 0.3em 0;
 }
 
-h2{
+h2 {
     padding: 0.4em 0;
 }
 
@@ -62,4 +64,21 @@ ul {
 
 ul li:before {
     content: ' ✓ ';
+}
+
+@media screen and (max-width: 900px) {
+    section {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    form {
+        width: 100%;
+    }
+
+    section {
+        margin-top: 1rem;
+        grid-template-columns: 1fr;
+    }
 }

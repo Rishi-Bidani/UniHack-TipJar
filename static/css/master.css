@@ -55,6 +55,6 @@ section.container {
     height: 100vh;
 }
 
-main{
-    height: calc(100vh - var(--navbar-height));
-}
+/*main{*/
+/*    height: calc(100vh - var(--navbar-height));*/
+/*}*/

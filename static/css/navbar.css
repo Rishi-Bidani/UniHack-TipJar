@@ -1,15 +1,15 @@
-nav{
+nav {
     height: var(--navbar-height);
     background-color: var(--white);
 }
 
-.nav--logo{
+.nav--logo {
     height: 3rem;
     aspect-ratio: 1;
     margin: auto 0;
 }
 
-.nav--heading{
+.nav--heading {
     font-size: clamp(1.7rem, 1.2rem + 1vw, 2.5rem);
     font-weight: 900;
     text-decoration: none;
@@ -17,36 +17,41 @@ nav{
     margin: auto 0;
 }
 
-header{
+header {
     margin: 0 5rem;
     gap: 1rem;
 }
 
-footer{
+footer {
     align-items: center;
     gap: 1rem;
     margin-right: 1rem;
     margin-left: auto;
 }
-
-footer a{
-    cursor: pointer
+.nav--item {
+    color: var(--text-color);
 }
 
-.nav--button{
+footer a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav--button {
     background-color: rgb(52, 101, 224);
     color: var(--white);
     height: fit-content;
     padding: 0.5em 1em;
     border-radius: 0.3em;
+    text-decoration: none;
 }
 
-.nav--button:hover{
+.nav--button:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-@media screen and (max-width: 750px){
-    header{
+@media screen and (max-width: 750px) {
+    header {
         margin: 0;
     }
 }
