@@ -53,6 +53,11 @@ def register():
     else:
         abort(404)
 
+# WELCOME
+@app.route("/welcome")
+def welcome():
+    return render_template("welcome.html")
+
 
 # WHAT THE DONATOR WILL SEE
 @app.route("/user/<username>")
@@ -62,4 +67,4 @@ def user(username):
 
 if __name__ == '__main__':
     # Change to false when in production
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
