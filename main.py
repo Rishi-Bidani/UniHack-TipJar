@@ -1,7 +1,15 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, redirect
 from server.password import Password
+from server.database import Database
+
+import os.path as path
 
 app = Flask(__name__)
+
+# create necessary tables
+database_file = path.join("server", "data", "data.db")
+db = Database(database_file)
+db.create_table_user()
 
 
 # HOME
@@ -12,7 +20,7 @@ def home():
 
 # LOGIN
 @app.route("/login", methods=['GET', 'POST'])
-def login():
+async def login():
     if request.method == "GET":
         return render_template("login.html")
 
@@ -27,6 +35,7 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
         print(username, password)
+        return redirect(url_for("login"))
     else:
         return render_template("404.html")
 
