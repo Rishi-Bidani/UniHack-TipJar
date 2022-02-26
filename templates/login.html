@@ -1,17 +1,36 @@
 {% extends 'base.html' %}
 
+{% block links %}
+<link rel="stylesheet" href="../static/css/login-register.css">
+{% endblock %}
+
 {% block main %}
-    <section class="container">
-        <form action="/login" method="POST">
-            <div class="form--item">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username">
-            </div>
-            <div class="form--item">
-                <label for="password">Password: </label>
-                <input type="password" name="password" id="password">
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-    </section>
+<section>
+    <form action="/login" method="POST">
+        <h2>Get into your account!</h2>
+        <input type="text"
+               name="username"
+               id="username"
+               placeholder="Your username"
+        >
+
+        <input type="password"
+               name="password"
+               id="password"
+               placeholder="Your password"
+        >
+
+        <button type="submit">Submit</button>
+    </form>
+    <article>
+        <h1 class="title">This is TipJar</h1>
+        <ul>
+            <li>Concentrate on what you do best, we'll manage your wallet</li>
+            <li>Lorem Ipsum stuff</li>
+            <li>Lorem Ipsum stuff</li>
+            <li>Lorem Ipsum stuff</li>
+
+        </ul>
+    </article>
+</section>
 {% endblock %}
