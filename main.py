@@ -70,6 +70,13 @@ async def register():
         abort(404)
 
 
+# LOGOUT
+@app.route("/logout")
+def logout():
+    if "username" in session:
+        session.pop('username', None)
+    return redirect("/")
+
 # WELCOME
 @app.route("/welcome")
 def welcome():
@@ -88,7 +95,7 @@ def user(code):
 
 
 # WHAT THE ACCEPTOR WILL SEE AFTER LOGIN
-@app.route("/user/<code>/edit")
+@app.route("/user/<code>/edit", methods=["GET", "POST", "PUT"])
 def edit(code):
     """
     Look up code, check if logged in
@@ -96,7 +103,7 @@ def edit(code):
     if request.method == "GET":
         if "username" in session:
             print("logged in")
-            return render_template("edit.html", data=session["username"])
+            return render_template("edit.html", user=session["username"])
         else:
             abort(401)
     abort(404)
