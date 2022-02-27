@@ -16,12 +16,16 @@
 <main>
     <ul>
         {% for link in links %}
+        <article class="tip-card">
             {% if link[0] == "eth" %}
-                <article class="tip-card">
-                    <img src="{{ url_for() }}" alt="">
-                </article>
+                <img src="{{ url_for('static', filename='images/icons8-ethereum.svg') }}" alt="ethereum logo">
+            {% elif link[0] == "btc" %}
+                <img src="{{ url_for('static', filename='images/icons8-bitcoin.svg') }}" alt="">
             {% endif %}
-        <li><strong>{{ link[0] }}:</strong> {{link[1]}}</li>
+            
+
+            {{link[1]}}
+        </article>
         {% endfor %}
     </ul>
 

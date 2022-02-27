@@ -18,3 +18,14 @@ main{
     width: 70%;
     margin: 2rem auto auto;
 }
+
+.tip-card{
+    border: 3px solid black;
+    height: 3rem;
+    display:flex;
+    align-items: center
+}
+
+.tip-card img{
+    height: 3rem;
+}
