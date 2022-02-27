@@ -13,6 +13,7 @@ database_file = path.join("server", "data", "data.db")
 db = Database(database_file)
 db.create_table_user()
 db.create_table_codes()
+db.create_table_userdata()
 
 
 # db.insert_user("1234", "username", "password")
@@ -61,6 +62,7 @@ async def register():
         try:
             db.insert_user(uuid, username, email, password)
             db.insert_code(uuid, username)
+            db.insert_userdata(uuid, username, "", "")
             session["username"] = username
             return redirect(f"/user/{uuid}/edit")
         except Exception as e:
@@ -76,6 +78,7 @@ def logout():
     if "username" in session:
         session.pop('username', None)
     return redirect("/")
+
 
 # WELCOME
 @app.route("/welcome")
@@ -103,12 +106,30 @@ def edit(code):
     if request.method == "GET":
         if "username" in session:
             print("logged in")
-            return render_template("edit.html", user=session["username"], code=code)
+            return render_template("edit.html",
+                                   user=session["username"],
+                                   code=code,
+                                   bio=db.get_bio(code)
+                                   )
         else:
             abort(401)
 
     if request.method == "PUT":
-        print(request.data)
+        if "username" in session:
+            print(request.data)
+            username = session["username"]
+            uuid = db.get_uuid(username)
+            db.update_links(uuid, request.data)
+            return {"errors": "None"}
+
+    if request.method == "POST":
+        if "username" in session:
+            print(request.data)
+            username = session["username"]
+            uuid = db.get_uuid(username)
+            db.update_bio(uuid, request.data.decode('utf-8'))
+            return {"errors": "None"}
+
     abort(404)
 
 

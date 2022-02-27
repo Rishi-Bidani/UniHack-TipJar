@@ -22,8 +22,8 @@
     </header>
     <hr>
     <section class="form flex flex--column">
-        <article class="form--item flex">
-            <textarea name="bio" id="bio" placeholder="Your Bio"></textarea>
+        <article class="form--item flex" data-code="{{code}}">
+            <textarea name="bio" id="bio" placeholder="Your Bio">{{bio.strip('\"')}}</textarea>
             <button class="submit">Submit</button>
         </article>
         <h3>Add your payment receiving options</h3>
