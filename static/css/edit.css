@@ -97,3 +97,13 @@ input[type="text"] {
     text-decoration: none;
     border: none;
 }
+
+ul {
+    list-style: none;
+    font-size: clamp(0.7rem, 0.7rem + 1vw, 1.3rem);
+    line-height: 2.5rem;
+}
+
+ul li:before {
+    content: ' ✓ ';
+}

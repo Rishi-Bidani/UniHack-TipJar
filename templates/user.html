@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+</head>
+<body class="flex flex--column">
+<header>
+    <figure>
+        <img src="{{ url_for('static', filename='images/newLogo.png') }}" alt="">
+        <figcaption>@ {{username}}</figcaption>
+    </figure>
+</header>
+<main>
+    <ul>
+        {% for link in links %}
+            {% if link[0] == "eth" %}
+                <article class="tip-card">
+                    <img src="{{ url_for() }}" alt="">
+                </article>
+            {% endif %}
+        <li><strong>{{ link[0] }}:</strong> {{link[1]}}</li>
+        {% endfor %}
+    </ul>
+
+</main>
+</body>
+</html>

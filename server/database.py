@@ -21,6 +21,12 @@ class Database:
         cursor.execute(sql, (uuid, created_at, username, email, password))
         self.con.commit()
 
+    def get_username(self, uuid):
+        sql = f"SELECT username from users WHERE uuid=?"
+        cursor = self.con.cursor()
+        cursor.execute(sql, (uuid,))
+        return cursor.fetchone()[0]
+
     def get_password_for_user(self, username):
         sql = f"SELECT password from users WHERE username=?"
         cursor = self.con.cursor()

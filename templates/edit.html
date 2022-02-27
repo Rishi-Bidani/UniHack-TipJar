@@ -28,7 +28,11 @@
         </article>
         <article>
             <h3>Your payment receiving options</h3>
-            {{links}}
+            <ul>
+                {% for link in links %}
+                <li><strong>{{ link[0] }}:</strong> {{link[1]}}</li>
+                {% endfor %}
+            </ul>
         </article>
         <h3>Add your payment receiving options</h3>
         <form action="/user/{{code}}/edit" id="links">

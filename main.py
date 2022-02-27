@@ -4,7 +4,7 @@ from server.database import Database
 from server.keygen import Key
 
 import os.path as path
-
+import json
 app = Flask(__name__)
 app.secret_key = '$ectret#eyFor$##$$i@ons'
 
@@ -94,7 +94,13 @@ def user(code):
     redirect to uuid if correctly found
     else redirect to 404
     """
-    return render_template("user.html")
+    username = db.get_username(code)
+    try:
+        links = json.loads(str(db.get_links(code), "utf-8"))
+    except Exception as e:
+        print(e)
+        links = []
+    return render_template("user.html", username=username, links=links)
 
 
 # WHAT THE ACCEPTOR WILL SEE AFTER LOGIN
@@ -107,10 +113,10 @@ def edit(code):
         if "username" in session:
             print("logged in")
             try:
-                links = str(db.get_links(code), "utf-8")
+                links = json.loads(str(db.get_links(code), "utf-8"))
             except Exception as e:
                 print(e)
-                links = ""
+                links = []
             return render_template("edit.html",
                                    user=session["username"],
                                    code=code,
