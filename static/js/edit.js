@@ -7,6 +7,10 @@ bioSubmitButton.addEventListener("click", async (e) => {
         method: "POST",
         body: JSON.stringify(bio)
     })
+    if(res.ok){
+        alert("Success")
+        window.location.reload()
+    }
 
 })
 
