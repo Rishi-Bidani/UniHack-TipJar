@@ -109,7 +109,8 @@ def edit(code):
             return render_template("edit.html",
                                    user=session["username"],
                                    code=code,
-                                   bio=db.get_bio(code)
+                                   bio=db.get_bio(code),
+                                   links=db.get_links(code)
                                    )
         else:
             abort(401)

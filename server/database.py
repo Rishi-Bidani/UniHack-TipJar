@@ -83,3 +83,9 @@ class Database:
         cursor = self.con.cursor()
         cursor.execute(sql, (uuid,))
         return cursor.fetchone()[0]
+
+    def get_links(self, uuid):
+        sql = "SELECT links FROM userdata WHERE uuid=?"
+        cursor = self.con.cursor()
+        cursor.execute(sql, (uuid,))
+        return cursor.fetchone()[0]
