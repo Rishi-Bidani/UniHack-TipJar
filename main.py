@@ -103,11 +103,13 @@ def edit(code):
     if request.method == "GET":
         if "username" in session:
             print("logged in")
-            return render_template("edit.html", user=session["username"])
+            return render_template("edit.html", user=session["username"], code=code)
         else:
             abort(401)
-    abort(404)
 
+    if request.method == "PUT":
+        print(request.data)
+    abort(404)
 
 
 if __name__ == '__main__':

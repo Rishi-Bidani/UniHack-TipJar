@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/edit.css') }}">
 
     <!--  JS  -->
-    <script defer src="{{ url_for('static', filename='js/submitbio.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/edit.js') }}"></script>
 
 </head>
 <body>
@@ -26,6 +26,22 @@
             <textarea name="bio" id="bio" placeholder="Your Bio"></textarea>
             <button class="submit">Submit</button>
         </article>
+        <h3>Add your payment receiving options</h3>
+        <form action="/user/{{code}}/edit" id="links">
+            <section>
+                <div class="form--container">
+                    <select name="chooseTipMethod[]" required>
+                        <option value="">--Select Option--</option>
+                        <option value="eth">Ethereum</option>
+                        <option value="btc">BitCoin</option>
+                    </select>
+                    <input type="text" name="link[]" placeholder="Your link">
+                </div>
+            </section>
+
+            <button type="button" class="add-new-payment">Add new payment</button>
+            <button class="submit--form">Submit</button>
+        </form>
     </section>
 </main>
 
