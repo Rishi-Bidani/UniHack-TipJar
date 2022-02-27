@@ -11,6 +11,10 @@ header {
     font-weight: 600;
 }
 
+img{
+    height: 3rem;
+}
+
 button.submit,
 .button--logout {
     margin-left: auto;

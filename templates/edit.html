@@ -17,6 +17,9 @@
 <body>
 <main class="flex flex--column">
     <header>
+        <a href="/user/{{code}}">
+            <img src="{{url_for('static', filename='images/newLogo.png') }}" alt="">
+        </a>
         Welcome, {{user}}
         <a href="/logout" class="button--logout">Logout</a>
     </header>

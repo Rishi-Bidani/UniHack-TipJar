@@ -23,9 +23,14 @@ main{
     border: 3px solid black;
     height: 3rem;
     display:flex;
-    align-items: center
+    align-items: center;
+    margin: 0.5rem 0;
 }
 
 .tip-card img{
     height: 3rem;
+}
+
+span.center{
+    text-align: center;
 }
