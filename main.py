@@ -95,7 +95,7 @@ def user(code):
 
 
 # WHAT THE ACCEPTOR WILL SEE AFTER LOGIN
-@app.route("/user/<code>/edit")
+@app.route("/user/<code>/edit", methods=["GET", "POST", "PUT"])
 def edit(code):
     """
     Look up code, check if logged in
