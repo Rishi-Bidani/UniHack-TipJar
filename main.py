@@ -106,11 +106,16 @@ def edit(code):
     if request.method == "GET":
         if "username" in session:
             print("logged in")
+            try:
+                links = str(db.get_links(code), "utf-8")
+            except Exception as e:
+                print(e)
+                links = ""
             return render_template("edit.html",
                                    user=session["username"],
                                    code=code,
                                    bio=db.get_bio(code),
-                                   links=db.get_links(code)
+                                   links=links
                                    )
         else:
             abort(401)
