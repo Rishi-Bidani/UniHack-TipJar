@@ -45,3 +45,41 @@ class Database:
         cursor = self.con.cursor()
         cursor.execute(sql, (code,))
         return cursor.fetchone()[0]
+
+    # Table 3 - userData
+    def create_table_userdata(self):
+        sql = """CREATE TABLE IF NOT EXISTS userdata 
+                 (uuid text PRIMARY KEY, username text UNIQUE, bio text, links text)"""
+        cursor = self.con.cursor()
+        cursor.execute(sql)
+        self.con.commit()
+
+    def insert_userdata(self, uuid, username, bio, links):
+        sql = "INSERT INTO userdata(uuid, username, bio, links) VALUES(?,?,?,?)"
+        cursor = self.con.cursor()
+        cursor.execute(sql, (uuid, username, bio, links))
+        self.con.commit()
+
+    def update_bio(self, uuid, bio):
+        sql = "UPDATE userdata SET bio=? WHERE uuid=?"
+        cursor = self.con.cursor()
+        cursor.execute(sql, (bio, uuid))
+        self.con.commit()
+
+    def update_links(self, uuid, links):
+        sql = "UPDATE userdata SET links=? WHERE uuid=?"
+        cursor = self.con.cursor()
+        cursor.execute(sql, (links, uuid))
+        self.con.commit()
+
+    def update_userdata(self, uuid, links, bio):
+        sql = "UPDATE userdata SET links=?, bio=? WHERE uuid=?"
+        cursor = self.con.cursor()
+        cursor.execute(sql, (links, bio, uuid))
+        self.con.commit()
+
+    def get_bio(self, uuid):
+        sql = "SELECT bio FROM userdata WHERE uuid=?"
+        cursor = self.con.cursor()
+        cursor.execute(sql, (uuid,))
+        return cursor.fetchone()[0]

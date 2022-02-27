@@ -1,7 +1,12 @@
 const bioSubmitButton = document.querySelectorAll(".submit")[0]
-bioSubmitButton.addEventListener("click", async () => {
+bioSubmitButton.addEventListener("click", async (e) => {
     const bio = document.querySelector("textarea[name='bio']").value;
-    // send request to /user/code/edit - put
+    const code = e.target.parentElement.dataset.code;
+    // console.log(code)
+    const res = await fetch(`/user/${code}/edit`, {
+        method: "POST",
+        body: JSON.stringify(bio)
+    })
 
 })
 
@@ -40,4 +45,8 @@ document.querySelector("#links").addEventListener("submit", async (e)=>{
         method: "PUT",
         body: JSON.stringify(data)
     })
+    if(res.ok){
+        alert("Success")
+        window.location.reload()
+    }
 })
